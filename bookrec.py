@@ -57,16 +57,6 @@ def get_data(Tahun_masuk= '', Fakultas= '', Hari=''):
 isi= pd.read_excel('JUDUL BUKU.xlsx')
 isi_item= isi['Judul'].values.tolist()
 
-def User_input_features():
-    Item= st.selectbox("Judul", isi_item)
-    Tahun_Masuk= st.selectbox("Tahun Masuk", ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022","2023"])
-    Fakultas= st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPS", "OTHERS"])
-    Hari= st.select_slider("Hari", ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"])
-    return Item, Tahun_Masuk, Fakultas, Hari 
-
-Item, Tahun_Masuk, Fakultas, Hari= User_input_features()
-
-
 ##transformasi data
 Judul= dataset[['Transaksi','Judul']] 
 transactions = Judul.groupby('Transaksi')['Judul'].apply(list).tolist()
@@ -79,6 +69,19 @@ dataset_encoded = pd.DataFrame(te_array, columns=te_columns)
 ##menjalankan algoritma FP-Growth
 support_threshold= 0.0009
 freq_items= fpgrowth(dataset_encoded, min_support=support_threshold, use_colnames= True)
+
+##menampilkan 10 item paling sering dipinjam
+st.subheader("10 Judul Paling Pering Dipinjam")
+freq_items["itemsets"][1:10]
+
+def User_input_features():
+    Item= st.selectbox("Judul", isi_item)
+    Tahun_Masuk= st.selectbox("Tahun Masuk", ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022","2023"])
+    Fakultas= st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPS", "OTHERS"])
+    Hari= st.select_slider("Hari", ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"])
+    return Item, Tahun_Masuk, Fakultas, Hari 
+
+Item, Tahun_Masuk, Fakultas, Hari= User_input_features()
 
 ##Association Rules
 metric= "lift"
