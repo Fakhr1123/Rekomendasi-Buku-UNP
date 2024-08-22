@@ -61,7 +61,7 @@ def User_input_features():
     Item= st.selectbox("Judul", isi_item)
     Tahun_Masuk= st.selectbox("Tahun Masuk", ["2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022","2023"])
     Fakultas= st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPS", "OTHERS"])
-    Hari= st.select_slider("Hari", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+    Hari= st.select_slider("Hari", ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"])
     return Item, Tahun_Masuk, Fakultas, Hari 
 
 Item, Tahun_Masuk, Fakultas, Hari= User_input_features()
