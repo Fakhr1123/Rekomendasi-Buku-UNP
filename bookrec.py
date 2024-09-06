@@ -8,7 +8,7 @@ from datetime import datetime
 from PIL import Image
 from mlxtend.preprocessing import TransactionEncoder
 
-image= Image.open('peminjaman.jpg')
+#image= Image.open('peminjaman.jpg')
 
 ##Judul
 st.write(""" 
