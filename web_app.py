@@ -9,6 +9,7 @@ from datetime import datetime
 from PIL import Image
 from mlxtend.preprocessing import TransactionEncoder
 import warnings
+import streamlit.components.v1 as components
 warnings.filterwarnings("ignore")
 
 st.image("logo_unp.png")
@@ -20,14 +21,18 @@ st.write("""
 
 # Define the sidebar or top menu
 selected = option_menu(
-    menu_title="Home",
-    options=["Eksplorasi Data", "Cari Rekomendasi", "Rekomendasi Berdasarkan Fakultas"],
+    menu_title="Menu",
+    options=["Home", "Eksplorasi Data",  "Cari Rekomendasi", "Rekomendasi Berdasarkan Fakultas"],
     menu_icon="columns-gap",
-    icons=["bar-chart-line-fill", "card-checklist", "collection-fill"],
+    icons=["house-fill","bar-chart-line-fill", "card-checklist", "collection-fill"],
     default_index=0,
     orientation="horizontal"
 )
 
+#Option Home
+if selected == "Home":
+    st.subheader('Profil Perpustakaan Universitas Negeri Padang')
+    st.video("https://www.youtube.com/watch?v=R6FIiJ-qhog", start_time=0)
 
 # Load the dataset once to avoid reloading it multiple times
 dataset = pd.read_excel('DATA PENELITIAN4.xlsx')
@@ -109,7 +114,7 @@ if selected == "Rekomendasi Berdasarkan Fakultas":
     rec_gabungan = pd.read_excel('HasilMerge.xlsx')
 
     def User_input_features():
-        Fakultas = st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPS", "OTHERS"])
+        Fakultas = st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPK", "OTHERS"])
         return Fakultas 
 
     Fakultas = User_input_features()

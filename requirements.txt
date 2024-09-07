@@ -1,0 +1,10 @@
+numpy
+pandas
+streamlit
+streamlit_option_menu
+matplotlib
+seaborn
+mlxtend
+DateTime
+mlxtend
+openpyxl 
