@@ -1,6 +1,6 @@
 numpy
 pandas
-streamlit
+streamlit 1.54.0
 streamlit_option_menu
 matplotlib
 seaborn
@@ -8,3 +8,4 @@ mlxtend
 DateTime
 mlxtend
 openpyxl 
+
