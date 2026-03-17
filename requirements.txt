@@ -1,12 +1,11 @@
+setuptools
 numpy
-pandas
-streamlit==1.54.0
 pandas==2.0.3
+streamlit==1.43.0
 scikit-learn==1.3.0
 streamlit_option_menu
 matplotlib
 seaborn
 mlxtend
 DateTime
-mlxtend
-openpyxl 
+openpyxl
