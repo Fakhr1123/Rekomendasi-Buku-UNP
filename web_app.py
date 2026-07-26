@@ -12,7 +12,7 @@ import warnings
 import streamlit.components.v1 as components
 warnings.filterwarnings("ignore")
 
-st.image("logo_unp.png")
+st.image("source_dataset/logo_unp.png")
 st.write(""" 
 # Web App Recommendation
 #### :books: Website Aplikasi Rekomendasi Buku Perpustakaan UNP :books:
@@ -35,7 +35,7 @@ if selected == "Home":
     st.video("https://www.youtube.com/watch?v=R6FIiJ-qhog", start_time=0)
 
 # Load the dataset once to avoid reloading it multiple times
-dataset = pd.read_excel('DATA PENELITIAN4.xlsx')
+dataset = pd.read_excel('source_dataset/DATA PENELITIAN4.xlsx')
 dataset = dataset[['Transaksi', 'Judul', 'Tahun Masuk', 'Fakultas', 'Hari']]
 dataset.columns = ['Transaksi', 'Judul', 'Tahun_Masuk', 'Fakultas', 'Hari']
 dataset['Tahun_Masuk'] = dataset['Tahun_Masuk'].astype(str)
@@ -67,9 +67,9 @@ if selected == "Cari Rekomendasi":
     st.write("#### Cari Rekomendasi")
     
     # Load additional data
-    RULE = pd.read_excel('Hasilmerge3.xlsx')
-    rekomendasi = pd.read_excel('Hasilmerge2.xlsx')
-    isi = pd.read_excel('JUDUL BUKU.xlsx')
+    RULE = pd.read_excel('source_dataset/Hasilmerge3.xlsx')
+    rekomendasi = pd.read_excel('source_dataset/Hasilmerge2.xlsx')
+    isi = pd.read_excel('source_dataset/JUDUL BUKU.xlsx')
     isi_item = isi['Judul'].values.tolist()
 
     # Input selectbox for Judul Buku
