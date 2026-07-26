@@ -1,0 +1,13 @@
+setuptools
+wheel
+pandas>=2.2.2
+streamlit>=1.38.0
+altair>=4.2.2
+streamlit-option-menu
+matplotlib
+seaborn
+DateTime
+openpyxl
+scikit-learn>=1.4.0
+mlxtend>=0.23.0
+numpy>=1.26,<3.0
