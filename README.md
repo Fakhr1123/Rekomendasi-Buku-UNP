@@ -27,26 +27,43 @@ Aplikasi ini mengimplementasikan **Market Basket Analysis** menggunakan algoritm
 
 ## 🔄 Alur Proses Aplikasi (*Workflow*)
 
-▶️1. DATA COLLECTION                                                                     
- • Metadata Judul Buku Perpustakaan (JUDUL BUKU.xlsx)
-   DATA COLLECTION                                                                     
- • Metadata Judul Buku Perpustakaan (JUDUL BUKU.xlsx)
- • Riwayat Historis Transaksi Peminjaman (DATA PENELITIAN4.xlsx) (Transaksi, Judul Buku, Tahun Masuk, Fakultas,       Hari)
-▶️2. DATA PREPROCESSING & CLEANING                                                       
- • Cleansing data (penanganan missing values & casting tipe data Tahun_Masuk)       
- • Matriks Transaksi: Mengelompokkan buku per transaksi/pustakawan                  
- • One-Hot Encoding menggunakan `TransactionEncoder` dari mlxtend
-▶️3. MACHINE LEARNING MODELING (FP-GROWTH & ASSOCIATION RULES)                           
- • Algoritma: FP-Growth (Frequent Pattern Growth)                                    
- • Penambangan Frequent Itemsets (Kombinasi buku yang sering dipinjam bersama)       
- • Generasi Association Rules (Mengekstrak relasi Antecedents ➔ Consequents)          
- • Evaluasi Metrik: Support, Confidence, dan Lift Ratio (> 1)
-▶️4. DEPLOYMENT & FEATURE IMPLEMENTATION (STREAMLIT)                                     
- • Merging & Storage Rules (Hasilmerge.xlsx, Hasilmerge2.xlsx, Hasilmerge3.xlsx)     
- • Interaktif Navigation via `streamlit_option_menu`
- • Feature 1: Eksplorasi Data (Distribusi Peminjaman per Fakultas & Tahun Masuk)     
- • Feature 2: Top Data Based on Peminjaman by Fakultas
- • Feature 3: E-Commerce Style Search (Rekomendasi Berdasar Judul Buku)
-▶️5. SYSTEM IMPROVEMENT & FUTURE ROADMAP                                                 
- • Peningkatan Layanan: Reorganisasi tata letak fisik rak buku perpustakaan          
- • Integrasi OPAC Real-time via API & Implementasi Hybrid Model (TF-IDF + FP-Growth)
+## 🔄 Alur Proses Aplikasi (*Workflow*)
+
+### 1. 📥 DATA COLLECTION
+* **Metadata Judul Buku:** `JUDUL BUKU.xlsx`
+* **Riwayat Transaksi Peminjaman:** `DATA PENELITIAN4.xlsx`
+  * *Variabel:* Transaksi, Judul Buku, Tahun Masuk, Fakultas, Hari
+
+---
+
+### 2. 🧹 DATA PREPROCESSING & CLEANING
+* **Cleansing Data:** Penanganan *missing values* & penyesuaian tipe data (`Tahun_Masuk`).
+* **Matriks Transaksi:** Mengelompokkan buku berdasarkan ID transaksi/pustakawan.
+* **One-Hot Encoding:** Mengubah format menjadi matriks biner menggunakan `TransactionEncoder` dari `mlxtend`.
+
+---
+
+### 3. 🤖 MACHINE LEARNING MODELING (FP-GROWTH & ASSOCIATION RULES)
+* **Algoritma Utama:** FP-Growth (*Frequent Pattern Growth*).
+* **Frequent Itemsets Mining:** Menemukan kombinasi buku yang sering dipinjam bersamaan.
+* **Association Rules Generation:** Mengekstrak hubungan *Antecedents* ➔ *Consequents*.
+* **Evaluasi Metrik:**
+  * *Support*
+  * *Confidence*
+  * *Lift Ratio* ($> 1$)
+
+---
+
+### 4. 🚀 DEPLOYMENT & FEATURE IMPLEMENTATION (STREAMLIT)
+* **Penyimpanan Aturan:** `Hasilmerge.xlsx`, `Hasilmerge2.xlsx`, `Hasilmerge3.xlsx`.
+* **Navigasi Interaktif:** Menggunakan `streamlit_option_menu`.
+* **Fitur Utama:**
+  1. **Eksplorasi Data:** Distribusi peminjaman per Fakultas & Tahun Masuk.
+  2. **Top Data:** Buku populer berdasarkan Fakultas.
+  3. **E-Commerce Style Search:** Rekomendasi berdasarkan input judul buku.
+
+---
+
+### 5. 🔮 SYSTEM IMPROVEMENT & FUTURE ROADMAP
+* **Peningkatan Layanan:** Reorganisasi tata letak fisik rak buku perpustakaan.
+* **Pengembangan Lanjutan:** Integrasi OPAC *real-time* via API & implementasi *Hybrid Model* (TF-IDF + FP-Growth).
