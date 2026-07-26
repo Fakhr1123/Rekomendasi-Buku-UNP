@@ -26,43 +26,27 @@ Aplikasi ini mengimplementasikan **Market Basket Analysis** menggunakan algoritm
 ---
 
 ## 🔄 Alur Proses Aplikasi (*Workflow*)
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 1. DATA COLLECTION                                                                     │
-│    • Metadata Judul Buku Perpustakaan (JUDUL BUKU.xlsx)                               │
-│    • Riwayat Historis Transaksi Peminjaman (DATA PENELITIAN4.xlsx)                    │
-│      (Transaksi, Judul Buku, Tahun Masuk, Fakultas, Hari)                             │
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 2. DATA PREPROCESSING & CLEANING                                                       │
-│    • Cleansing data (penanganan missing values & casting tipe data Tahun_Masuk)       │
-│    • Matriks Transaksi: Mengelompokkan buku per transaksi/pustakawan                  │
-│    • One-Hot Encoding menggunakan `TransactionEncoder` dari mlxtend                    │
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 3. MACHINE LEARNING MODELING (FP-GROWTH & ASSOCIATION RULES)                           │
-│    • Algoritma: FP-Growth (Frequent Pattern Growth)                                    │
-│    • Penambangan Frequent Itemsets (Kombinasi buku yang sering dipinjam bersama)       │
-│    • Generasi Association Rules (Mengekstrak relasi Antecedents ➔ Consequents)          │
-│    • Evaluasi Metrik: Support, Confidence, dan Lift Ratio (> 1)                        │
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 4. DEPLOYMENT & FEATURE IMPLEMENTATION (STREAMLIT)                                     │
-│    • Merging & Storage Rules (Hasilmerge.xlsx, Hasilmerge2.xlsx, Hasilmerge3.xlsx)     │
-│    • Interaktif Navigation via `streamlit_option_menu`                                │
-│    • Feature 1: Eksplorasi Data (Distribusi Peminjaman per Fakultas & Tahun Masuk)     │
-│    • Feature 2: Top Data Based on Peminjaman by Fakultas                               │
-│    • Feature 3: E-Commerce Style Search (Rekomendasi Berdasar Judul Buku)               │
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 5. SYSTEM IMPROVEMENT & FUTURE ROADMAP                                                 │
-│    • Peningkatan Layanan: Reorganisasi tata letak fisik rak buku perpustakaan          │
-│    • Integrasi OPAC Real-time via API & Implementasi Hybrid Model (TF-IDF + FP-Growth) │
-└────────────────────────────────────────────────────────────────────────────────────────┘
+
+▶️1. DATA COLLECTION                                                                     
+ • Metadata Judul Buku Perpustakaan (JUDUL BUKU.xlsx)
+   DATA COLLECTION                                                                     
+ • Metadata Judul Buku Perpustakaan (JUDUL BUKU.xlsx)
+ • Riwayat Historis Transaksi Peminjaman (DATA PENELITIAN4.xlsx) (Transaksi, Judul Buku, Tahun Masuk, Fakultas,       Hari)
+▶️2. DATA PREPROCESSING & CLEANING                                                       
+ • Cleansing data (penanganan missing values & casting tipe data Tahun_Masuk)       
+ • Matriks Transaksi: Mengelompokkan buku per transaksi/pustakawan                  
+ • One-Hot Encoding menggunakan `TransactionEncoder` dari mlxtend
+▶️3. MACHINE LEARNING MODELING (FP-GROWTH & ASSOCIATION RULES)                           
+ • Algoritma: FP-Growth (Frequent Pattern Growth)                                    
+ • Penambangan Frequent Itemsets (Kombinasi buku yang sering dipinjam bersama)       
+ • Generasi Association Rules (Mengekstrak relasi Antecedents ➔ Consequents)          
+ • Evaluasi Metrik: Support, Confidence, dan Lift Ratio (> 1)
+▶️4. DEPLOYMENT & FEATURE IMPLEMENTATION (STREAMLIT)                                     
+ • Merging & Storage Rules (Hasilmerge.xlsx, Hasilmerge2.xlsx, Hasilmerge3.xlsx)     
+ • Interaktif Navigation via `streamlit_option_menu`
+ • Feature 1: Eksplorasi Data (Distribusi Peminjaman per Fakultas & Tahun Masuk)     
+ • Feature 2: Top Data Based on Peminjaman by Fakultas
+ • Feature 3: E-Commerce Style Search (Rekomendasi Berdasar Judul Buku)
+▶️5. SYSTEM IMPROVEMENT & FUTURE ROADMAP                                                 
+ • Peningkatan Layanan: Reorganisasi tata letak fisik rak buku perpustakaan          
+ • Integrasi OPAC Real-time via API & Implementasi Hybrid Model (TF-IDF + FP-Growth)
