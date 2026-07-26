@@ -1,162 +1,49 @@
 # Rekomendasi-Buku-UNP
-# Import Library
+# 📚 Website Aplikasi Rekomendasi Buku Perpustakaan UNP
 
-import streamlit as st
+> **Live Demo:** [rekomendasi-buku-unp-web-app.streamlit.app](https://rekomendasi-buku-unp-web-app.streamlit.app/)
 
-from streamlit_option_menu import option_menu
+Aplikasi web berbasis data untuk memberikan rekomendasi buku secara personal interaktif kepada mahasiswa berdasarkan judul buku pilihan maupun preferensi fakultas.
 
-import numpy as np
+---
 
-import pandas as pd
+## 📸 Tampilan Aplikasi
 
-import matplotlib.pyplot as plt
+![Demo Aplikasi](path/to/demo-or-screenshot.gif)
+*Sertakan GIF singkat (10-15 detik) atau screenshot aplikasi di sini.*
 
-import seaborn as sns
+---
 
-from mlxtend.frequent_patterns import association_rules, fpgrowth
+## ✨ Fitur Utama
 
-from datetime import datetime
+- **📊 Eksplorasi Data:** Visualisasi interaktif mengenai distribusi buku dan tren peminjaman.
+- **🔍 Cari Rekomendasi:** Sistem rekomendasi berbasis judul (*Content-Based Filtering*).
+- **🎓 Rekomendasi Berdasarkan Fakultas:** Filter preferensi buku yang disesuaikan dengan fakultas pengguna.
 
-from PIL import Image
+---
 
-from mlxtend.preprocessing import TransactionEncoder
+## 🛠️ Tech Stack & Library
 
-import warnings
+- **Bahasa Pemrograman:** Python
+- **Framework Web:** Streamlit
+- **Pembersihan & Manipulasi Data:** Pandas, NumPy
+- **Machine Learning / Algoritma:** Scikit-Learn (TF-IDF Vectorizer, Cosine Similarity)
+- **Visualisasi Data:** Plotly / Seaborn
 
-import streamlit.components.v1 as components
+---
 
-warnings.filterwarnings("ignore")
+## 💡 Metodologi & Alur Kerja
 
-st.image("logo_unp.png")
-st.write(""" 
-# Web App Recommendation
-#### :books: Website Aplikasi Rekomendasi Buku Perpustakaan UNP :books:
-"""
-         )
+1. **Data Preprocessing:** Pembersihan data transaksi peminjaman dan metadata buku perpustakaan.
+2. **Feature Extraction:** Ekstraksi fitur teks menggunakan *TF-IDF*.
+3. **Similarity Score:** Menghitung kemiripan antar-buku menggunakan *Cosine Similarity*.
+4. **Deployment:** Men-deploy aplikasi ke Streamlit Community Cloud.
 
-# Define the sidebar or top menu
-selected = option_menu(
-    menu_title="Menu",
-    options=["Home", "Eksplorasi Data",  "Cari Rekomendasi", "Rekomendasi Berdasarkan Fakultas"],
-    menu_icon="columns-gap",
-    icons=["house-fill","bar-chart-line-fill", "card-checklist", "collection-fill"],
-    default_index=0,
-    orientation="horizontal"
-)
+---
 
-#Option Home
-if selected == "Home":
-    st.subheader('Profil Perpustakaan Universitas Negeri Padang')
-    st.video("https://www.youtube.com/watch?v=R6FIiJ-qhog", start_time=0)
+## 🚀 Cara Menjalankan di Komputer Lokal
 
-# Load the dataset once to avoid reloading it multiple times
-dataset = pd.read_excel('DATA PENELITIAN4.xlsx')
-dataset = dataset[['Transaksi', 'Judul', 'Tahun Masuk', 'Fakultas', 'Hari']]
-dataset.columns = ['Transaksi', 'Judul', 'Tahun_Masuk', 'Fakultas', 'Hari']
-dataset['Tahun_Masuk'] = dataset['Tahun_Masuk'].astype(str)
-rekomendasi= pd.read_excel('Hasilmerge2.xlsx')
+### 1. Clone Repositori
 
-# Option 1: Eksplorasi Data
-if selected == "Eksplorasi Data":
-    st.subheader('Explorasi Data')
-    # Plot 1: Jumlah Peminjaman Buku menurut Tahun Masuk
-    fig, ax = plt.subplots(figsize=(5, 3))
-    dataset['Tahun_Masuk'].value_counts().plot(kind='bar', color='blue')
-    ax.set_xlabel('Tahun Masuk')
-    ax.set_ylabel('Jumlah')
-    ax.set_title('Jumlah Peminjaman Buku menurut Tahun Masuk')
-    st.pyplot(fig)
-
-    # Plot 2: Jumlah Peminjaman menurut Fakultas
-    fig1, ax1 = plt.subplots(figsize=(5, 3))
-    dataset['Fakultas'].value_counts().plot(kind='bar', color='red')
-    ax1.set_xlabel('Fakultas')
-    ax1.set_ylabel('Jumlah')
-    ax1.set_title('Jumlah Peminjaman menurut Fakultas')
-    st.pyplot(fig1)
-    st.subheader("Top 3 Rekomendasi Buku Perpustakaan UNP")
-    rekomendasi[0:3]
-
-# Option 2: Cari Rekomendasi
-if selected == "Cari Rekomendasi":
-    st.write("#### Cari Rekomendasi")
-    
-    # Load additional data
-    RULE = pd.read_excel('Hasilmerge3.xlsx')
-    rekomendasi = pd.read_excel('Hasilmerge2.xlsx')
-    isi = pd.read_excel('JUDUL BUKU.xlsx')
-    isi_item = isi['Judul'].values.tolist()
-
-    # Input selectbox for Judul Buku
-    Item = st.selectbox("Judul", isi_item)
-    Item_set = frozenset([Item])
-
-    def parse_list(x):
-        if isinstance(x, frozenset):
-            return ", ".join(map(str, x))
-        else:
-            return str(x)
-    
-    def return_item_judul(item_antecedents):
-        DATASETS = RULE[["antecedents", "consequents"]].copy()
-        DATASETS["antecedents"] = DATASETS["antecedents"].apply(parse_list)
-        DATASETS["consequents"] = DATASETS["consequents"].apply(parse_list)
-
-        item_antecedents_str = parse_list(item_antecedents)
-
-        matches = DATASETS.loc[DATASETS["antecedents"] == item_antecedents_str]
-        
-        if not matches.empty:
-            return matches.to_dict('records')
-        else:
-            return None
-
-    # Show recommendations based on selected book
-    result = return_item_judul(Item_set)
-
-    if result:
-        st.markdown("Rekomendasi Buku Perpustakaan: ")
-        st.success(f"Jika meminjam **{Item}**, maka dapat meminjam : ")
-        for match in result:
-            st.write(f"- {match['consequents']}")
-    else:
-        st.error(f"Tidak ada rekomendasi untuk **{Item}**")
-
-# Option 3: Rekomendasi Berdasarkan Fakultas
-if selected == "Rekomendasi Berdasarkan Fakultas":
-    st.write("#### Rekomendasi Berdasarkan Fakultas")
-
-    rec_gabungan = pd.read_excel('HasilMerge.xlsx')
-
-    def User_input_features():
-        Fakultas = st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPK", "OTHERS"])
-        return Fakultas 
-
-    Fakultas = User_input_features()
-
-    class FilterData:
-        def __init__(self, data):
-            self.data = data
-        
-        def filter_rec(self, column, value):
-            filtered_data = self.data[self.data[column] == value]
-            return filtered_data
-        
-        def plot_top_ten(self, filtered_data, top_ten=10):
-            fig, ax = plt.subplots(figsize=(7, 3))
-            filtered_data['consequents'].value_counts().head(top_ten).sort_values(ascending=True).plot(kind='barh')
-            ax.set_xlabel('Jumlah')
-            ax.set_ylabel(f"Fakultas: {Fakultas}")
-            ax.set_title('10 Buku paling direkomendasikan Menurut Fakultas')
-            plt.tight_layout()
-            return fig
-
-    filter_ins = FilterData(rec_gabungan)
-    filtered_data = filter_ins.filter_rec('Fakultas', Fakultas)
-
-    if not filtered_data.empty:
-        fig = filter_ins.plot_top_ten(filtered_data, top_ten=10)
-        st.pyplot(fig)
-        st.success(f'**Rekomendasi** untuk Mahasiswa UNP Fakultas **{Fakultas}** dapat meminjam buku ini di Perpustakaan UNP')
-    else:
-        st.error("Tidak Ada Data yang Dipilih.")
+git clone [https://github.com/username-anda/nama-repositori.git](https://github.com/username-anda/nama-repositori.git)
+cd nama-repositori
