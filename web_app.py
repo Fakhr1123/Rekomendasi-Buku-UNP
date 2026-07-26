@@ -111,7 +111,7 @@ if selected == "Cari Rekomendasi":
 if selected == "Rekomendasi Berdasarkan Fakultas":
     st.write("#### Rekomendasi Berdasarkan Fakultas")
 
-    rec_gabungan = pd.read_excel('HasilMerge.xlsx')
+    rec_gabungan = pd.read_excel('source_dataset/HasilMerge.xlsx')
 
     def User_input_features():
         Fakultas = st.selectbox("Fakultas", ["FIP", "FBS", "FMIPA", "FIS", "FT", "FIK", "FPP", "FPK", "OTHERS"])
