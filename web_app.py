@@ -39,7 +39,7 @@ dataset = pd.read_excel('source_dataset/DATA PENELITIAN4.xlsx')
 dataset = dataset[['Transaksi', 'Judul', 'Tahun Masuk', 'Fakultas', 'Hari']]
 dataset.columns = ['Transaksi', 'Judul', 'Tahun_Masuk', 'Fakultas', 'Hari']
 dataset['Tahun_Masuk'] = dataset['Tahun_Masuk'].astype(str)
-rekomendasi= pd.read_excel('Hasilmerge2.xlsx')
+rekomendasi= pd.read_excel('source_dataset/Hasilmerge2.xlsx')
 
 # Option 1: Eksplorasi Data
 if selected == "Eksplorasi Data":
