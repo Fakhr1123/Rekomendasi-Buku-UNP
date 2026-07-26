@@ -10,7 +10,9 @@ Aplikasi web interaktif berbasis Streamlit yang menyajikan sistem rekomendasi pe
 
 | Halaman Utama (Home) | Cari Rekomendasi Buku |
 | :---: | :---: |
-| *(Unggah screenshot Home)* | *(Unggah screenshot Rekomendasi)* |
+| *<img width="1278" height="664" alt="chrome-capture-2026-07-26" src="https://github.com/user-attachments/assets/8e748e92-6555-445a-8382-6c30d8fac999" />* | *<img width="1278" height="664" alt="chrome-capture-2026-07-26 (2)" src="https://github.com/user-attachments/assets/24e3fbea-8e1d-4002-be59-263b8e154bed" />
+* | *<img width="1278" height="664" alt="chrome-capture-2026-07-26 (1)" src="https://github.com/user-attachments/assets/819f90c7-bd74-42e3-9e4e-721564f50abb" />
+* |
 
 ---
 
